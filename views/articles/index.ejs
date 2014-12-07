@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="main.css">
+<title></title>
+<h1>DAILY PLANET NEWS!!!!</h1>
+</head>
+<body>
+<b> HERE ARE THE LATEST HEADLINES!!!!!<b>
+<% articleList.forEach(function (article) { %>
+  <div>
+    <a href="/articles/show/<%= article.article_id %>"><%= article.title %></a>
+    <div>
+    <%= article.summary %>
+    </div>
+  </div>
+<% }) %>
+</body>
+</html>

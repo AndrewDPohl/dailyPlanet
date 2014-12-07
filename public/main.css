@@ -1,0 +1,20 @@
+body {
+	text-align: center;
+	background: green;
+}
+
+h2 {
+	font-family: Helvetica;
+	color: black;
+}
+
+div {
+	display: block;
+	width: 500px;
+	height: 25px;
+	background: white;
+	padding-bottom: 30px;
+	margin-bottom: 10px;
+	align: center;
+}
+

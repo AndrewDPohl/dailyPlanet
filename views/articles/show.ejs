@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <title>Daily Planet App</title>
+</head>
+<body>
+  <div>
+    <h2>
+      <a href="/articles/<%= newArticle.article_id %>"><%= newArticle.title %></a>
+    </h2>
+    <div>
+      <%= newArticle.summary %>
+    </div>
+  </div>
+  <div>
+    <form action="/articles/<%= newArticle.article_id %>?_method=DELETE" method="post">
+      <button>DELETE</button>
+    </form>
+  </div>
+</body>
+</html>
