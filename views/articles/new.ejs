@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="main.css">
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Planet</title>
+    <link rel="stylesheet" href="/css/foundation.min.css" />
+    <script src="/js/vendor/modernizr.js"></script>
 	<title>New Books</title>
 </head>	
 	<body>
-		<form method="post" action="/articles/new">
-		<div>
-			<input type="text" name="newArticle[title]">
-		</div>
-		<div>
-			<textarea name="newArticle[summary]"></textarea>
-		</div>
-		<div>
-			<button>Save</button>
-		</div>
+		<h1>POST A NEW ARTICLE</h1>
+		<form method="post" action="/articles">
+		<div class="row">
+    <div class="large-12 columns">
+      <label>
+        <input type="text" name="article[title]"placeholder="TITLE GOES HERE" />
+      </label>
+    </div>
+  </div>
+   <div class="large-12 columns">
+      <label>
+        <textarea name="article[summary]" placeholder="SUMMARY GOES HERE"></textarea>
+      </label>
+    </div>
+    <div class="large-6 large-centered columns">
+    	<input type="text" name="article[url]" placeholder="ARTICLE URL">
+    </div>
+    <div class="large-6 large-centered columns">
+    	<input type="text" name="article[image]" placeholder="IMAGE URL">
+    </div>
+    <div class="row">
+    	<div class="large-12 large-centered columns">
+    		<input type="submit" role="button" class="button large-centered">
+    	</div>
+    </div>
+
+  </div>
+		
 		</form>
+		 <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
 	</body>
 </html>
+

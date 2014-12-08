@@ -1,19 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="main.css">
-<title></title>
-<h1>DAILY PLANET NEWS!!!!</h1>
-</head>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Planet</title>
+    <link rel="stylesheet" href="/css/foundation.min.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
 <body>
-<b> HERE ARE THE LATEST HEADLINES!!!!!<b>
-<% articleList.forEach(function (article) { %>
-  <div>
-    <a href="/articles/show/<%= article.article_id %>"><%= article.title %></a>
-    <div>
-    <%= article.summary %>
+<div>
+  <h1>DAILY PLANET NEWS!!!!</h1>
+</div>
+
+<% articleList.forEach(function (article) { %> 
+  <div class="row">
+    <div class="columns small-12 medium-9 panel callout radius">
+      <a href="/articles/<%= article.article_id %>"\><%= article.title %></a>
+      <div>
+      <%= article.summary %>
+      </div>
+    </div>
+    <div class="columns small-12 medium-3">
+      <img src="<%= article.image %>" alt="article main image"/>
     </div>
   </div>
 <% }) %>
+  
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>

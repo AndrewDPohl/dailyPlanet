@@ -11,8 +11,6 @@ var config = {
 };
 
 
-
-
 //takes information from the body of the individual page we are GETting from
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -45,66 +43,71 @@ app.get("/articles", function (req, res) {
     client.query("SELECT * FROM articles", [], function (err, result) {
       done();
       console.log(result.rows);
-      var articleList = result.rows;
-      res.render("articles/index.ejs", {articleList: articleList});
+      res.render("articles/index", {articleList: result.rows});
     });
   });
 });
 
 app.get("/articles/new", function (req, res) {
-	res.render("articles/new.ejs");
+	res.render("articles/new");
 });
 
 
-app.get("/articles/show/:article_id", function(req, res) {
-  var article_id = Number(req.params.article_id);
+app.get("/articles/:id", function(req, res) {
+  //var article_id = Number(req.params.article_id);
   pg.connect(config, function (err, client, done) {
     if (err) {
       console.error("OOPS!!! SOMETHING WENT WRONG!", err);
     }
-    client.query("SELECT * FROM articles WHERE article_id = $1", [article_id], function (err, result) {
+    client.query("SELECT * FROM articles WHERE article_id=$1", [req.params.id], function (err, result) {
       done();
-      console.log("THIS IS RESULT");
-      console.log(result.rows[0]);
-      var article = result.rows[0];
-      res.render("articles/show.ejs", {newArticle: article});
+      // console.log("THIS IS RESULT");
+      // console.log(result.rows);
+      if (result.rows.length) {
+        res.render("articles/show", {article: result.rows[0]});
+      } else {
+        res.status(404).send("article not found")
+      }
+        //      res.render("articles/show", {article: result.rows[0]});
     });
   });
 });
 
-app.post("/articles/new", function (req, res) {
+app.post("/articles", function (req, res) {
  var newArticle = req.body.article;
    pg.connect(config, function(err, client, done){
         if (err) {
              console.error("OOOPS!!! SOMETHING WENT WRONG!", err);
         }
-        client.query("INSERT INTO articles (title, summary) VALUES ($1, $2) RETURNING *", [req.body.newArticle.title, req.body.newArticle.summary], function (err, result) {
+        client.query("INSERT INTO articles (title, summary, url, image) VALUES ($1, $2, $3, $4) RETURNING *", [newArticle.title, newArticle.summary, newArticle.url, newArticle.image], function (err, result) {
             done(); 
             console.log(result.rows);
             var article = result.rows[0];
-            res.redirect("/articles/show/" + article.article_id);           
+            res.redirect("/articles/" + article.article_id);           
         });
 
     });
 });
 
 //Delete an article by ID
-// app.delete("/articles/:id", function (req, res) {
-//   var articleId = parseInt(req.params.id);
-//   var articleIndex = null;
-//   for (var i = 0, notFound = true; i < articles.length && notFound; i+=1) {
-//     if (articles[i].id == articleId) {
-//       notFound = false;
-//       articleIndex = i;
-//     }
-//   }
-//   if (notFound) {
-//     res.send(404).send("Article Not Found");
-//   } else {
-//     articles.splice(articleIndex, 1);w
-//     res.redirect("/articles");
-//   }
-// });
+app.delete("/articles/:id", function (req, res) {
+  pg.connect(config, function (err, client, done) {
+    if (err) {
+      console.error("OOPS!!!! SOMETHING WENT WRONG!", err);
+    } 
+    client.query("DELETE FROM articles WHERE article_id=$1 RETURNING *", [req.params.id], function(err, done){
+      done();
+      console.log(result.rows);
+      if (result.rows.length) {
+        console.log("DELETED SUCCESSFULLY");
+        res.redirect("/");
+      } else {
+        res.status(404).send("article not found");
+      }
+    });
+
+  });
+});
 
 //Listens to make sure that JS is running
 app.listen(3000, function() {

@@ -3,18 +3,30 @@ body {
 	background: green;
 }
 
+h1 {
+	font-size: 35px;
+	font-family: Tahoma;
+	text-shadow: 7px 8px 5px rgba(150, 150, 150, 1);
+
+}
+
 h2 {
 	font-family: Helvetica;
 	color: black;
 }
 
+a {
+	color: red;
+}
+
 div {
 	display: block;
 	width: 500px;
-	height: 25px;
+	height: 50px;
 	background: white;
-	padding-bottom: 30px;
-	margin-bottom: 10px;
-	align: center;
+	margin: 0 auto 30px auto;
+	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 }
 

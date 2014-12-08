@@ -1,22 +1,37 @@
 <!DOCTYPE>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="main.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="/css/foundation.min.css" />
+    <script src="/js/vendor/modernizr.js"></script>
   <title>Daily Planet App</title>
 </head>
 <body>
   <div>
     <h2>
-      <a href="/articles/<%= newArticle.article_id %>"><%= newArticle.title %></a>
+      <a href="/articles/<%= article.article_id %>"><%= article.title %></a>
     </h2>
     <div>
-      <%= newArticle.summary %>
+      <%= article.summary %>
     </div>
   </div>
   <div>
-    <form action="/articles/<%= newArticle.article_id %>?_method=DELETE" method="post">
-      <button>DELETE</button>
+      <a href="<%= article.url %>">ORIGINAL ARTICLE</a>
+    </div>
+    <div>
+      <img src="<%= article.image %>" alt="article main image" />
+    </div>
+  <div>
+    <form action="/articles/<%= article.article_id %>?_method=DELETE" method="post">
+      <button id="delete">DELETE</button>
     </form>
   </div>
+   <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
 </body>
 </html>
